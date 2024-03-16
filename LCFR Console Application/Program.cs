@@ -15,14 +15,26 @@ namespace lcfrConsoleApp
         [DllImport("kernel32.dll", SetLastError = true)]
         private static extern bool SetConsoleTitle(string lpConsoleTitle);
         private static Dictionary<string, Dictionary<string, string>> commandTypes;
+        private static DiscordCommandHandler discordCommandHandler;
+        private static InformationCommandHandler informationCommandHandler;
+        private static RosterCommandHandler rosterCommandHandler;
+
+
 
         static void Main(string[] args)
         {
             // Load commands from JSON file
             LoadCommandsFromJson();
 
+            // Initialize command handlers
+            discordCommandHandler = new DiscordCommandHandler();
+            informationCommandHandler = new InformationCommandHandler();
+            rosterCommandHandler = new RosterCommandHandler();
+
             // Set the console window title
             SetConsoleTitle("LCFR API Bash");
+
+
 
             // Display title in the console.
             Console.WriteLine("Welcome to the LCFR API");
@@ -40,27 +52,32 @@ namespace lcfrConsoleApp
 
                 // Split the input into command and parameters
                 string[] inputParts = userInput.Split(' ');
-                string command = inputParts[0].ToLower();
+                string commandType = inputParts[0].ToLower();
+                
 
+                
                 // Check if the command type exists in the loaded commands
-                if (commandTypes.ContainsKey(command))
+                if (commandTypes.ContainsKey(commandType))
                 {
+                    Dictionary<string, string> commands = commandTypes[commandType];
                     // Switch on the command type
-                    switch (command)
+                    switch (commandType)
                     {
                         
+                            
                         case "information":
-                            HandleInformationCommands(inputParts);
+                            informationCommandHandler.HandleCommand(inputParts);
+
                             break;
                         case "discord":
-                            HandleDiscordCommands(inputParts);
+                            discordCommandHandler.HandleCommand(inputParts);
                             break;
                         case "roster":
-                            HandleRosterCommands(inputParts);
+                            rosterCommandHandler.HandleCommand(inputParts);
                             break;
                         default:
                             Console.ForegroundColor = ConsoleColor.Red;
-                            Console.WriteLine($"Invalid command type: {command}");
+                            Console.WriteLine($"Invalid command type: {commandType}");
                             Console.ResetColor();
                             break;
                     }
@@ -68,72 +85,14 @@ namespace lcfrConsoleApp
                 else
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine($"Invalid command type: {command}");
+                    Console.WriteLine($"Invalid command type: {commandType}");
                     Console.ResetColor();
                 }
             }
         }
 
-        static void HandleInformationCommands(string[] inputParts)
-        {
-            string subCommand = inputParts.Length > 1 ? inputParts[1].ToLower() : "";
-            switch (subCommand)
-            {
-                case "help":
-                    Console.WriteLine("Help for information commands:");
-                    // Display help information for information commands
-                    break;
-                case "version":
-                    Console.WriteLine("Display version information:");
-                    // Handle version command for Information type
-                    break;
-                // Add more cases for other commands under the information type
-                default:
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine($"Invalid command under 'information' type: {subCommand}");
-                    Console.ResetColor();
-                    break;
-            }
-        }
 
-        static void HandleRosterCommands(string[] inputParts)
-        {
-
-        }
-        static void HandleDiscordCommands(string[] inputParts)
-        {
-            string subCommand = inputParts.Length > 1 ? inputParts[1].ToLower() : "";
-            switch (subCommand)
-            {
-                case "shiftadd":
-                    if (inputParts.Length < 3)
-                    {
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("Please specify at least two parameters: host, username");
-                        Console.ResetColor();
-                        break;
-                    }
-                    string host = inputParts[1].ToLower();
-                    string username = inputParts[2].ToLower();
-                    shiftAdd(host, username);
-                    break;
-
-                // Add more cases for other commands under the discord type
-
-                default:
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine($"Invalid command under 'discord' type: {subCommand}");
-                    Console.ResetColor();
-                    break;
-            }
-        }
-
-        static void shiftAdd(string host, string username)
-        {
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine($"\n  ShiftAdd: {host} {username}");
-            Console.ResetColor();
-        }
+       
 
         static void LoadCommandsFromJson()
         {
