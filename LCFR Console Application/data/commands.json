@@ -1,0 +1,16 @@
+{
+  "information": {
+    "version": "Display the version of the application and API",
+    "help": "Show help information and all commands"
+
+  },
+  "discord": {
+    "shiftadd": "Note that someone attended a shift"
+    
+  },
+  "roster": {
+   
+  }
+  
+}
+
