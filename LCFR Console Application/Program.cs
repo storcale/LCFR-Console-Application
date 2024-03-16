@@ -39,7 +39,7 @@ namespace lcfrConsoleApp
             // Display title in the console.
             Console.WriteLine("Welcome to the LCFR API");
             Console.WriteLine("------------------------\n");
-            Console.WriteLine("Enter 'ihelp' to see all commands ");
+            Console.WriteLine("Enter 'information help' to see all commands ");
 
             while (true)
             {
@@ -66,7 +66,7 @@ namespace lcfrConsoleApp
                         
                             
                         case "information":
-                            informationCommandHandler.HandleCommand(inputParts);
+                            informationCommandHandler.HandleCommand(inputParts,commandTypes);
 
                             break;
                         case "discord":

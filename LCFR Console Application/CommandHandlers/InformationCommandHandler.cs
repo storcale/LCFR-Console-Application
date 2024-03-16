@@ -1,27 +1,44 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Data;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace lcfrConsoleApp
 {
     public class InformationCommandHandler
     {
-        private static Dictionary<string, Dictionary<string, string>> commandTypes;
-
-        public void HandleCommand(string[] inputParts)
+        public void HandleCommand(string[] inputParts, Dictionary<string, Dictionary<string, string>> commands)
         {
-            LoadCommandsFromJson();
+            if (commands == null)
+            {
+                Console.WriteLine("No commands loaded.");
+                return;
+            }
 
             string subCommand = inputParts.Length > 1 ? inputParts[1].ToLower() : "";
             switch (subCommand)
             {
                 case "help":
-                    Console.WriteLine($"Help for {commandType} commands:");
-                    foreach (var cmd in commands);
+                    Console.ForegroundColor = ConsoleColor.Magenta;
+                    Console.WriteLine($"\n Help for commands:");
+                    Console.ResetColor();
+                    Console.WriteLine($"------------------------\n");
+                    Console.WriteLine("use [type] [command] (parameters) to use a command");
+
+                    var informationCommands = commands["information"];
+
+                    foreach(var type in commands)
                     {
-                        Console.WriteLine($"{cmd.Key}: {cmd.Value}");
-                    };
+                        Console.ForegroundColor = ConsoleColor.Blue;
+                        Console.WriteLine($"\n Commands for {type.Key} type: ");
+                        foreach(var command in type.Value)
+                        { 
+                            Console.ForegroundColor = ConsoleColor.Cyan;
+                            Console.WriteLine($"- {command.Key}: {command.Value}");
+                        }
+                        Console.ResetColor();
+                    }
                     break;
+
                 case "version":
                     Console.WriteLine("Display version information:");
                     // Handle version command for Information type
@@ -34,26 +51,5 @@ namespace lcfrConsoleApp
                     break;
             }
         }
-        static void LoadCommandsFromJson()
-        {
-            string jsonFilePath = "data/commands.json";
-
-            try
-            {
-                string json = File.ReadAllText(jsonFilePath);
-                commandTypes = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, string>>>(json);
-            }
-            catch (FileNotFoundException)
-            {
-                Console.WriteLine($"File {jsonFilePath} not found.");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error loading commands from {jsonFilePath}: {ex.Message}");
-            }
-        }
     }
-
-
-    
 }
