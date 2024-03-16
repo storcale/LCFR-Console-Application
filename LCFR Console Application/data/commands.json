@@ -1,11 +1,12 @@
 {
   "information": {
-    "version": "Display the version of the application and API",
-    "help": "Show help information and all commands"
+    "version": "Display the version of the application and API. information version",
+    "help": "Show help information and all commands."
 
   },
   "discord": {
-    "shiftadd": "Note that someone attended a shift"
+    "shiftadd": "Note that someone attended a shift. discord shiftadd [host] [user]",
+    "report": "Report an user with optionally an image for proof. discord shiftadd [reporter] [reported] (image link)"
     
   },
   "roster": {
@@ -13,4 +14,3 @@
   }
   
 }
-
