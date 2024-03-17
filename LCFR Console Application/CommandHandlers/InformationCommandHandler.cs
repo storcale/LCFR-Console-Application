@@ -1,13 +1,20 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Diagnostics;
 
 namespace lcfrConsoleApp
 {
     public class InformationCommandHandler
     {
+        private static Dictionary<string, Dictionary<string, string>> information;
+        
+
         public void HandleCommand(string[] inputParts, Dictionary<string, Dictionary<string, string>> commands)
         {
+            
+
             if (commands == null)
             {
                 Console.WriteLine("No commands loaded.");
@@ -24,7 +31,7 @@ namespace lcfrConsoleApp
                     Console.WriteLine($"------------------------\n");
                     Console.WriteLine("use [type] [command] (parameters) to use a command");
 
-                    var informationCommands = commands["information"];
+                    
 
                     foreach(var type in commands)
                     {
@@ -51,5 +58,8 @@ namespace lcfrConsoleApp
                     break;
             }
         }
+        
+
     }
 }
+

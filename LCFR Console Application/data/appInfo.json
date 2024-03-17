@@ -1,0 +1,9 @@
+{
+  "Console Application": {
+    "name": "LCFR API Bash",
+    "version": "0.0.2"
+  },
+  "APIs": {
+    "rosterAPI":  "API/roster.json"
+  }
+}
