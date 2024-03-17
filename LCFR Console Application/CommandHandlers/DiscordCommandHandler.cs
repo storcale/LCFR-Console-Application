@@ -4,7 +4,7 @@ namespace lcfrConsoleApp
 {
     public class DiscordCommandHandler
     {
-        public void HandleCommand(string[] inputParts)
+        public async Task HandleCommand(string[] inputParts)
         {
             string subCommand = inputParts.Length > 1 ? inputParts[1].ToLower() : "";
             switch (subCommand)

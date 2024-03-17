@@ -1,11 +1,17 @@
 {
   "rosterAPI": {
     "get": {
-      "searchUser": "https://script.google.com/macros/s/AKfycbzKwIGYApm5JXvfR9YzYN3Qz1tO7QJyiJTo88wv1ufeIBuxhUcuSQ-8YJ0bqz975Hhg/exec?command=searchUser&callsign={callsign}&division={division}",
-      "getVersion": "https://script.google.com/macros/s/AKfycbzKwIGYApm5JXvfR9YzYN3Qz1tO7QJyiJTo88wv1ufeIBuxhUcuSQ-8YJ0bqz975Hhg/exec?command=getVersion"
+      "searchuser": "https://script.google.com/macros/s/AKfycbzKwIGYApm5JXvfR9YzYN3Qz1tO7QJyiJTo88wv1ufeIBuxhUcuSQ-8YJ0bqz975Hhg/exec?command=searchUser&callsign={callsign}&division={division}",
+      "getversion": "https://script.google.com/macros/s/AKfycbzKwIGYApm5JXvfR9YzYN3Qz1tO7QJyiJTo88wv1ufeIBuxhUcuSQ-8YJ0bqz975Hhg/exec?command=getVersion"
+    },
+    "post": {
+      "edituser": "https://example.com/api/updateUser",
+      "adduser": "https://example.com/api/createUser"
     }
   },
   "LCFR API": {
-    "getVersion": "https://script.google.com/macros/s/AKfycbwlfDVE8p-fwBWVNkvVXdiLS_ETd0U1NmH2QdX98DhpxdsQazUeCdYS7_LkLBgSNyFd/exec?type=information&action=getVersion"
+    "get": {
+      "getversion": "https://script.google.com/macros/s/AKfycbwlfDVE8p-fwBWVNkvVXdiLS_ETd0U1NmH2QdX98DhpxdsQazUeCdYS7_LkLBgSNyFd/exec?type=information&action=getVersion"
+    }
   }
 }

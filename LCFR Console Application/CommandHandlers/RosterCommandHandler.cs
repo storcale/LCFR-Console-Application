@@ -1,19 +1,23 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace lcfrConsoleApp
 {
     public class RosterCommandHandler
     {
-        public void HandleCommand(string[] inputParts)
+        public async Task HandleCommand(string[] inputParts)
         {
             RequestManager requestManager = new RequestManager();
-            requestManager.LoadAPIs(); // Load APIs before making request
+            await requestManager.LoadAPIs(); // Await the LoadAPIs method before making request
 
             string subCommand = inputParts.Length > 1 ? inputParts[1].ToLower() : "";
             switch (subCommand)
             {
                 case "getversion":
-                    var response = requestManager.MakeRequest("roster", "getversion", null).Result; 
+                    var response = await requestManager.MakeRequest("rosterAPI", "getversion", null);
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("RosterAPI version: " + response);
+                    Console.ResetColor();
                     break;
                 default:
                     Console.ForegroundColor = ConsoleColor.Red;

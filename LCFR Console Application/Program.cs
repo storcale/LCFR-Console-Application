@@ -1,11 +1,4 @@
-﻿using Microsoft.VisualBasic;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using Newtonsoft.Json;
-using System.Data;
-using System.Reflection;
+﻿using Newtonsoft.Json;
 using System.Runtime.InteropServices;
 
 namespace lcfrConsoleApp
@@ -18,8 +11,7 @@ namespace lcfrConsoleApp
         private static DiscordCommandHandler discordCommandHandler;
         private static InformationCommandHandler informationCommandHandler;
         private static RosterCommandHandler rosterCommandHandler;
-
-
+        
 
         static void Main(string[] args)
         {
@@ -33,8 +25,6 @@ namespace lcfrConsoleApp
 
             // Set the console window title
             SetConsoleTitle("LCFR API Bash");
-
-
 
             // Display title in the console.
             Console.WriteLine("Welcome to the LCFR API");
@@ -53,27 +43,21 @@ namespace lcfrConsoleApp
                 // Split the input into command and parameters
                 string[] inputParts = userInput.Split(' ');
                 string commandType = inputParts[0].ToLower();
-                
 
-                
                 // Check if the command type exists in the loaded commands
                 if (commandTypes.ContainsKey(commandType))
                 {
-                    Dictionary<string, string> commands = commandTypes[commandType];
                     // Switch on the command type
                     switch (commandType)
                     {
-                        
-                            
                         case "information":
-                            informationCommandHandler.HandleCommand(inputParts,commandTypes);
-
+                            informationCommandHandler.HandleCommand(inputParts, commandTypes).Wait();
                             break;
                         case "discord":
-                            discordCommandHandler.HandleCommand(inputParts);
+                            discordCommandHandler.HandleCommand(inputParts).Wait();
                             break;
                         case "roster":
-                            rosterCommandHandler.HandleCommand(inputParts);
+                            rosterCommandHandler.HandleCommand(inputParts).Wait();
                             break;
                         default:
                             Console.ForegroundColor = ConsoleColor.Red;
@@ -90,9 +74,6 @@ namespace lcfrConsoleApp
                 }
             }
         }
-
-
-       
 
         static void LoadCommandsFromJson()
         {
@@ -112,6 +93,5 @@ namespace lcfrConsoleApp
                 Console.WriteLine($"Error loading commands from {jsonFilePath}: {ex.Message}");
             }
         }
-
     }
 }

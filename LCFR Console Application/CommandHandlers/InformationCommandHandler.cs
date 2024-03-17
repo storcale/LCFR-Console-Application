@@ -9,9 +9,9 @@ namespace lcfrConsoleApp
     public class InformationCommandHandler
     {
         private static Dictionary<string, Dictionary<string, string>> information;
-        
 
-        public void HandleCommand(string[] inputParts, Dictionary<string, Dictionary<string, string>> commands)
+
+        public async Task HandleCommand(string[] inputParts, Dictionary<string, Dictionary<string, string>> commands)
         {
             
 
