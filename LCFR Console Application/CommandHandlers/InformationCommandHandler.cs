@@ -31,7 +31,7 @@ namespace lcfrConsoleApp
                     Console.WriteLine($"------------------------\n");
                     Console.WriteLine("use [type] [command] (parameters) to use a command");
 
-                    
+                    var informationCommands = commands["information"];
 
                     foreach(var type in commands)
                     {
