@@ -1,40 +1,52 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace lcfrConsoleApp
 {
-    public class DiscordCommandHandler
+    internal class DiscordCommandHandler
     {
+        private RequestManager requestManager;
+
+        public DiscordCommandHandler()
+        {
+            requestManager = new RequestManager();
+        }
+
         public async Task HandleCommand(string[] inputParts)
         {
-            string subCommand = inputParts.Length > 1 ? inputParts[1].ToLower() : "";
-            switch (subCommand)
+            string command = inputParts[1].ToLower();
+            Dictionary<string, string> parameters = requestManager.ConstructParameters(inputParts, 2);
+
+            // Handle each discord command
+            switch (command)
             {
                 case "shiftadd":
-                    if (inputParts.Length < 3)
-                    {
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("Please specify at least two parameters: host, username");
-                        Console.ResetColor();
-                        break;
-                    }
-                    string host = inputParts[1].ToLower();
-                    string username = inputParts[2].ToLower();
-                    shiftAdd(host, username);
+                    await ExecuteRequest("discord", "shiftAdd", parameters);
                     break;
-                // Add more cases for other commands under the discord type
+                case "report":
+                    await ExecuteRequest("discord", "report", parameters);
+                    break;
+                case "notice":
+                    await ExecuteRequest("discord", "notice", parameters);
+                    break;
                 default:
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine($"Invalid command under 'discord' type: {subCommand}");
+                    Console.WriteLine($"Invalid discord command: {command}");
                     Console.ResetColor();
                     break;
             }
         }
 
-        private void shiftAdd(string host, string username)
-        {
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine($"\n  ShiftAdd: {host} {username}");
-            Console.ResetColor();
+        private async Task ExecuteRequest(string type, string action, Dictionary<string, string> parameters)
+{
+            string response = await requestManager.MakeRequest(type, action, parameters);
+            if (response != null)
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine(response);
+                Console.ResetColor();
+            }
         }
     }
 }

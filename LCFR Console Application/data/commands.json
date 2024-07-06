@@ -3,15 +3,15 @@
     "version": "Display the version of the application and API. information version",
     "help": "Show help information and all commands."
   },
- "discord": {
+  "discord": {
     "shiftadd": "Note that someone attended a shift. discord shiftadd [host] [user]",
     "report": "Report an user with optionally an image for proof. discord shiftadd [reporter] [reported] (image link)",
     "notice": "Log that someone did good work and that you noticed them."
   },
   "roster": {
-    "getversion": "Get the RosterAPI current deployment version",
     "adduser": "Add an employee to the roster. ",
-    "removeuser": "Remove an employee of the roster",
-    "edituser": "Edit an user's information"
+    "searchuser": "Search an user on the roster and display its information.",
+    "removeuser": "Remove an employee from the roster.",
+    "edituser": "Edit an user's information."
   }
 }

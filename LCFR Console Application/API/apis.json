@@ -1,17 +1,44 @@
 {
-  "rosterAPI": {
-    "get": {
-      "searchuser": "https://script.google.com/macros/s/AKfycbzKwIGYApm5JXvfR9YzYN3Qz1tO7QJyiJTo88wv1ufeIBuxhUcuSQ-8YJ0bqz975Hhg/exec?command=searchUser&callsign={callsign}&division={division}",
-      "getversion": "https://script.google.com/macros/s/AKfycbzKwIGYApm5JXvfR9YzYN3Qz1tO7QJyiJTo88wv1ufeIBuxhUcuSQ-8YJ0bqz975Hhg/exec?command=getVersion"
+  "roster": {
+    "searchUser": {
+      "method": "GET",
+      "url": "https://script.google.com/macros/s/AKfycbwFgeZZXghgVcgYnkubt2UrpJaAiY8aZyHzWkeYWVWhOThrGdNK08HNp8Phookh53SS/exec?type=roster&action=searchUser&callsign={callsign}&division={division}&discordBot=false"
     },
-    "post": {
-      "edituser": "https://example.com/api/updateUser",
-      "adduser": "https://example.com/api/createUser"
+    "getCallsignAvaibility": {
+      "method": "GET",
+      "url": "https://script.google.com/macros/s/AKfycbwFgeZZXghgVcgYnkubt2UrpJaAiY8aZyHzWkeYWVWhOThrGdNK08HNp8Phookh53SS/exec?type=roster&action=getCallsignAvaibility&callsign={callsign}"
+    },
+    "editUser": {
+      "method": "POST",
+      "url": "https://script.google.com/macros/s/AKfycbwFgeZZXghgVcgYnkubt2UrpJaAiY8aZyHzWkeYWVWhOThrGdNK08HNp8Phookh53SS/exec?authorization={id}:{token}&action=editUser&type=roster&division={division}&callsign={callsign}&newCallsign={newCallsign}&discord={discord}&roblox={roblox}"
+    },
+    "addUser": {
+      "method": "POST",
+      "url": "https://script.google.com/macros/s/AKfycbzKwIGYApm5JXvfR9YzYN3Qz1tO7QJyiJTo88wv1ufeIBuxhUcuSQ-8YJ0bqz975Hhg/exec?command=addUser&division={division}&rank={rank}&callsign={newCallsign}&discord={discord}&roblox={roblox}&authorization={id}:{token}&dept={dept}&type=roster&action=addUser"
+    },
+    "removeUser": {
+      "method": "POST",
+      "url": "https://script.google.com/macros/s/AKfycbwFgeZZXghgVcgYnkubt2UrpJaAiY8aZyHzWkeYWVWhOThrGdNK08HNp8Phookh53SS/exec?authorization={id}:{token}&action=removeUser&type=roster&callsign={callsign}&division={division}"
     }
   },
-  "LCFR API": {
-    "get": {
-      "getversion": "https://script.google.com/macros/s/AKfycbwlfDVE8p-fwBWVNkvVXdiLS_ETd0U1NmH2QdX98DhpxdsQazUeCdYS7_LkLBgSNyFd/exec?type=information&action=getVersion"
+  "discord": {
+    "shiftAdd": {
+      "method": "POST",
+      "url": "https://script.google.com/macros/s/AKfycbwFgeZZXghgVcgYnkubt2UrpJaAiY8aZyHzWkeYWVWhOThrGdNK08HNp8Phookh53SS/exec?type=discord&action=shiftAdd&host={host}&user={user}&authorization={id}:{token}&dept={dept}"
+    },
+    "report": {
+      "method": "POST",
+      "url": "https://script.google.com/macros/s/AKfycbwFgeZZXghgVcgYnkubt2UrpJaAiY8aZyHzWkeYWVWhOThrGdNK08HNp8Phookh53SS/exec?action=report&type=discord&authorization={id}:{token}&reporter={reporter}&user={user}&info={info}&image={image}&dept={dept}"
+    },
+    "notice": {
+      "method": "POST",
+      "url": "https://script.google.com/macros/s/AKfycbwFgeZZXghgVcgYnkubt2UrpJaAiY8aZyHzWkeYWVWhOThrGdNK08HNp8Phookh53SS/exec?type=discord&authorization={id}:{token}&action=notice&noticer={noticer}&noticed={noticed}&image={image}&reason={reason}&dept={dept}"
+    }
+  },
+  "information": {
+    "getVersion": {
+      "method": "GET",
+      "url": "https://script.google.com/macros/s/AKfycbwFgeZZXghgVcgYnkubt2UrpJaAiY8aZyHzWkeYWVWhOThrGdNK08HNp8Phookh53SS/exec?type=information&action=getVersion"
     }
   }
 }

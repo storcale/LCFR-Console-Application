@@ -4,6 +4,6 @@
     "version": "0.0.2"
   },
   "APIs": {
-    "rosterAPI":  "API/roster.json"
+    "rosterAPI": "API/roster.json"
   }
 }
